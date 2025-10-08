@@ -22,6 +22,7 @@ class _BottomAppBarWidgetState extends State<BottomAppBarWidget> {
     return BottomAppBar(
       color: AppColors.surface,
       height: 90,
+      elevation: 3,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [

@@ -8,9 +8,20 @@ import 'package:car_convoy_app/screens/convoy_screen.dart';
 import 'package:car_convoy_app/screens/profile_screen.dart';
 
 import 'package:car_convoy_app/themes/app_colors.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  try {
+    await dotenv.load(fileName: ".env");
+  } catch (e) {
+    throw Exception('Error loading .env file: $e');
+  }
+
+  MapboxOptions.setAccessToken(dotenv.env["MAPBOX_TOKEN"]!);
+
   runApp(const Dashboard());
 }
 
