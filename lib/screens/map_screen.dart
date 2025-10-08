@@ -1,4 +1,5 @@
 import 'package:car_convoy_app/widgets/maps/recenter_button_widget.dart';
+import 'package:car_convoy_app/widgets/maps/searchable_map_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -16,6 +17,16 @@ class _MapScreenState extends State<MapScreen> {
   bool _isMapReady = false;
   bool _showRecenterButton = false;
   geo.Position? _userPosition;
+
+  void _onSearchSubmitted(String query) {
+    if (query.isNotEmpty) {
+      // TODO: Implement your map search/geocoding logic here
+      print('Search Query Submitted: $query');
+
+      // Optional: Hide the keyboard after submission
+      FocusScope.of(context).unfocus();
+    }
+  }
 
   /// Recenter the camera on the user's last known location.
   void _recenterCamera() {
@@ -96,6 +107,22 @@ class _MapScreenState extends State<MapScreen> {
           RecenterButton(
             isVisible: _showRecenterButton,
             onPressed: _recenterCamera,
+          ),
+
+          Positioned(
+            top: 70.0, // Adjust this value to clear the status bar
+            left: 10.0,
+            right: 10.0,
+            child: CustomSearchBar(
+              onSubmitted: _onSearchSubmitted, // Pass the handler
+              buttons: [
+                {
+                  'text': 'Home',
+                  'icon': Icons.home_outlined,
+                  'onPressed': () {},
+                },
+              ],
+            ),
           ),
         ],
       ),
