@@ -52,7 +52,6 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   int _currentIndex = 0;
 
-  // List of screens corresponding to each tab
   final List<Widget> _screens = [
     const MapScreen(),
     const ChatScreen(),
@@ -64,7 +63,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: _screens[_currentIndex], // Display the selected screen
+      body: IndexedStack(index: _currentIndex, children: _screens),
       bottomNavigationBar: BottomAppBarWidget(
         currentIndex: _currentIndex,
         onTabSelected: (index) {

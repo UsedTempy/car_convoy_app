@@ -19,8 +19,8 @@ class _RecenterButtonState extends State<RecenterButton> {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: 24,
-      left: 24,
+      bottom: 12,
+      left: 12,
       child: AnimatedOpacity(
         opacity: widget.isVisible ? 1.0 : 0.0,
         duration: const Duration(milliseconds: 100),
@@ -31,7 +31,7 @@ class _RecenterButtonState extends State<RecenterButton> {
             onPressed: widget.onPressed,
             backgroundColor: AppColors.background,
             foregroundColor: AppColors.primary,
-            mini: true,
+            mini: false,
             child: const Icon(Icons.my_location),
           ),
         ),
