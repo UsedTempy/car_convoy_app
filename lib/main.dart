@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 
+import 'package:car_convoy_app/widgets/navigation_bar/bottom_app_bar_widget.dart';
+
+import 'package:car_convoy_app/screens/map_screen.dart';
+import 'package:car_convoy_app/screens/chat_screen.dart';
+import 'package:car_convoy_app/screens/convoy_screen.dart';
+import 'package:car_convoy_app/screens/profile_screen.dart';
+
+import 'package:car_convoy_app/themes/app_colors.dart';
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const Dashboard());
 }
 
@@ -9,6 +19,46 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Convoy App Mockup',
+      theme: ThemeData.dark(useMaterial3: true),
+      home: const DashboardScreen(),
+    );
+  }
+}
+
+class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({super.key});
+
+  @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  int _currentIndex = 0;
+
+  // List of screens corresponding to each tab
+  final List<Widget> _screens = [
+    const MapScreen(),
+    const ChatScreen(),
+    const ConvoyScreen(),
+    const ProfileScreen(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      body: _screens[_currentIndex], // Display the selected screen
+      bottomNavigationBar: BottomAppBarWidget(
+        currentIndex: _currentIndex,
+        onTabSelected: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+      ),
+    );
   }
 }
